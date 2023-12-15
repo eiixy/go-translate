@@ -35,3 +35,7 @@ func main() {
 }
 
 ```
+
+## License
+
+[MIT](https://github.com/eiixy/go-translate/blob/master/LICENSE)

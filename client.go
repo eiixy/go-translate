@@ -22,6 +22,7 @@ type Client struct {
 	targetLang string
 }
 
+// NewClient new a Client
 func NewClient(opts ...Option) *Client {
 	c := Client{
 		targetLang: LangZhCn,
@@ -33,10 +34,12 @@ func NewClient(opts ...Option) *Client {
 	return &c
 }
 
+// Translates translate texts
 func (r Client) Translates(texts []string) ([]string, error) {
 	return r.TranslatesWithTargetLang(texts, r.targetLang)
 }
 
+// Translate translate text
 func (r Client) Translate(text string) (string, error) {
 	return r.TranslateWithTargetLang(text, r.targetLang)
 }
@@ -46,6 +49,7 @@ type kv struct {
 	val string
 }
 
+// TranslatesWithTargetLang translate texts with target lang
 func (r Client) TranslatesWithTargetLang(texts []string, targetLang string) ([]string, error) {
 	if len(texts) == 0 {
 		return []string{}, nil
@@ -91,6 +95,7 @@ func (r Client) TranslatesWithTargetLang(texts []string, targetLang string) ([]s
 	return texts, nil
 }
 
+// TranslateWithTargetLang translate text with target lang
 func (r Client) TranslateWithTargetLang(text, targetLang string) (string, error) {
 	_ = r.limiter.Wait(context.Background())
 	result, err := r.request(text, targetLang)
